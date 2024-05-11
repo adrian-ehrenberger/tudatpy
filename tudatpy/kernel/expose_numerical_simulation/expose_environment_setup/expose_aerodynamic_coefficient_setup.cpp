@@ -307,7 +307,8 @@ namespace aerodynamic_coefficients {
             py::arg("independent_variable_names") = independent_variable_names,
             py::arg("force_coefficients_frame") = ta::negative_aerodynamic_frame_coefficients,
             py::arg("moment_coefficients_frame") = ta::body_fixed_frame_coefficients,
-            py::arg("add_force_contribution_to_moments") = false
+            py::arg("add_force_contribution_to_moments") = false,
+              get_docstring("hypersonic_flow").c_str()
         );
 
         m.def("bridged_models",
@@ -316,7 +317,8 @@ namespace aerodynamic_coefficients {
             py::arg("coefficients_settings2"),
             py::arg("bridge_function"),
             py::arg("bridge_function_limits"),
-            py::arg("bridge_function_variable") = ta::AerodynamicCoefficientsIndependentVariables::knudsen_number_dependent
+            py::arg("bridge_function_variable") = ta::AerodynamicCoefficientsIndependentVariables::knudsen_number_dependent,
+              get_docstring("bridged_models").c_str()
         );
 
 
