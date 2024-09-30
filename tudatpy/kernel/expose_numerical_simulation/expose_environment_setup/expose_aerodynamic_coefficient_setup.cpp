@@ -270,56 +270,59 @@ namespace aerodynamic_coefficients {
               py::arg("independent_variable_names"),
               get_docstring("tabulated_from_files_control_surface").c_str());
 
-        // m.def("rarefied_flow",
-        //     &tss::RarefiedFlowAerodynamicCoefficientSettings,
-        //     py::arg("reference_length"),
-        //     py::arg("reference_area"),
-        //     py::arg("moment_reference_point") = Eigen::Vector3d::Constant( TUDAT_NAN ),
-        //     py::arg("independent_variable_names") = {
-        //         ta::AerodynamicCoefficientsIndependentVariables::angle_of_attack_dependent,
-        //         ta::AerodynamicCoefficientsIndependentVariables::angle_of_sideslip_dependent,
-        //         ta::AerodynamicCoefficientsIndependentVariables::temperature_dependent,
-        //         ta::AerodynamicCoefficientsIndependentVariables::velocity_dependent,
-        //         ta::AerodynamicCoefficientsIndependentVariables::he_number_density_dependent,
-        //         ta::AerodynamicCoefficientsIndependentVariables::o_number_density_dependent,
-        //         ta::AerodynamicCoefficientsIndependentVariables::n2_number_density_dependent,
-        //         ta::AerodynamicCoefficientsIndependentVariables::o2_number_density_dependent,
-        //         ta::AerodynamicCoefficientsIndependentVariables::ar_number_density_dependent,
-        //         ta::AerodynamicCoefficientsIndependentVariables::h_number_density_dependent,
-        //         ta::AerodynamicCoefficientsIndependentVariables::n_number_density_dependent,
-        //         ta::AerodynamicCoefficientsIndependentVariables::anomalous_o_number_density_dependent},
-        //     py::arg("force_coefficients_frame") = ta::negative_aerodynamic_frame_coefficients,
-        //     py::arg("moment_coefficients_frame") = ta::body_fixed_frame_coefficients,
-        //     py::arg("add_force_contribution_to_moments") = false
-        // );
+        // py::class_<tss::RarefiedFlowAerodynamicCoefficientSettings,
+        //         std::shared_ptr<tss::RarefiedFlowAerodynamicCoefficientSettings>>(
+        //         m, "RarefiedFlowAerodynamicCoefficientSettings");
 
-        std::vector<ta::AerodynamicCoefficientsIndependentVariables> independent_variable_names = {
-            ta::AerodynamicCoefficientsIndependentVariables::angle_of_attack_dependent,
-            ta::AerodynamicCoefficientsIndependentVariables::angle_of_sideslip_dependent,
-            ta::AerodynamicCoefficientsIndependentVariables::mach_number_dependent
-        };
-
-        m.def("hypersonic_flow",
-            &tss::hypersonicFlowAerodynamicCoefficientSettings,
+        m.def("rarefied_flow",
+            &tss::rarefiedFlowAerodynamicCoefficientSettings,
             py::arg("reference_length"),
             py::arg("reference_area"),
             py::arg("moment_reference_point") = Eigen::Vector3d::Constant( TUDAT_NAN ),
-            py::arg("independent_variable_names") = independent_variable_names,
+            py::arg("independent_variable_names") = std::vector<ta::AerodynamicCoefficientsIndependentVariables>{
+                ta::AerodynamicCoefficientsIndependentVariables::angle_of_attack_dependent,
+                ta::AerodynamicCoefficientsIndependentVariables::angle_of_sideslip_dependent,
+                ta::AerodynamicCoefficientsIndependentVariables::temperature_dependent,
+                ta::AerodynamicCoefficientsIndependentVariables::velocity_dependent,
+                ta::AerodynamicCoefficientsIndependentVariables::he_number_density_dependent,
+                ta::AerodynamicCoefficientsIndependentVariables::o_number_density_dependent,
+                ta::AerodynamicCoefficientsIndependentVariables::n2_number_density_dependent,
+                ta::AerodynamicCoefficientsIndependentVariables::o2_number_density_dependent,
+                ta::AerodynamicCoefficientsIndependentVariables::ar_number_density_dependent,
+                ta::AerodynamicCoefficientsIndependentVariables::h_number_density_dependent,
+                ta::AerodynamicCoefficientsIndependentVariables::n_number_density_dependent,
+                ta::AerodynamicCoefficientsIndependentVariables::anomalous_o_number_density_dependent},
             py::arg("force_coefficients_frame") = ta::negative_aerodynamic_frame_coefficients,
             py::arg("moment_coefficients_frame") = ta::body_fixed_frame_coefficients,
-            py::arg("add_force_contribution_to_moments") = false,
-              get_docstring("hypersonic_flow").c_str()
-        );
+            py::arg("add_force_contribution_to_moments") = false);
 
-        m.def("bridged_models",
-            &tss::bridgedModelsAerodynamicCoefficientSettings,
-            py::arg("coefficients_settings1"),
-            py::arg("coefficients_settings2"),
-            py::arg("bridge_function"),
-            py::arg("bridge_function_limits"),
-            py::arg("bridge_function_variable") = ta::AerodynamicCoefficientsIndependentVariables::knudsen_number_dependent,
-              get_docstring("bridged_models").c_str()
-        );
+        // std::vector<ta::AerodynamicCoefficientsIndependentVariables> independent_variable_names = {
+        //     ta::AerodynamicCoefficientsIndependentVariables::angle_of_attack_dependent,
+        //     ta::AerodynamicCoefficientsIndependentVariables::angle_of_sideslip_dependent,
+        //     ta::AerodynamicCoefficientsIndependentVariables::mach_number_dependent
+        // };
+
+        // m.def("hypersonic_flow",
+        //     &tss::hypersonicFlowAerodynamicCoefficientSettings,
+        //     py::arg("reference_length"),
+        //     py::arg("reference_area"),
+        //     py::arg("moment_reference_point") = Eigen::Vector3d::Constant( TUDAT_NAN ),
+        //     py::arg("independent_variable_names") = independent_variable_names,
+        //     py::arg("force_coefficients_frame") = ta::negative_aerodynamic_frame_coefficients,
+        //     py::arg("moment_coefficients_frame") = ta::body_fixed_frame_coefficients,
+        //     py::arg("add_force_contribution_to_moments") = false,
+        //       get_docstring("hypersonic_flow").c_str()
+        // );
+
+        // m.def("bridged_models",
+        //     &tss::bridgedModelsAerodynamicCoefficientSettings,
+        //     py::arg("coefficients_settings1"),
+        //     py::arg("coefficients_settings2"),
+        //     py::arg("bridge_function"),
+        //     py::arg("bridge_function_limits"),
+        //     py::arg("bridge_function_variable") = ta::AerodynamicCoefficientsIndependentVariables::knudsen_number_dependent,
+        //       get_docstring("bridged_models").c_str()
+        // );
 
 
         /////////////////////////////////////////////////////////////////
